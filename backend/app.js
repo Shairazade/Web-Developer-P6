@@ -1,7 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const saucesRoutes = require('./routes/sauces');
+const userRoutes = require('./routes/user');
 
-const app = express();
+
+const { error } = require('console');
 
 mongoose.connect('mongodb+srv://adminuserp6:SHadusocr23@atlascluster.sezgukv.mongodb.net/?retryWrites=true&w=majority',
   { useNewUrlParser: true,
@@ -9,7 +13,8 @@ mongoose.connect('mongodb+srv://adminuserp6:SHadusocr23@atlascluster.sezgukv.mon
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-app.use(express.json());
+const app = express();
+
 
 // headers d'accès à l'API
 app.use((req, res, next) => {
@@ -18,5 +23,13 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
   });
+
+app.use(express.json());
+app.use(bodyParser.json());
+
+
+
+app.use('/api/sauces', saucesRoutes);
+app.use('api/auth', userRoutes);
 
 module.exports = app;
