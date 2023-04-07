@@ -2,10 +2,12 @@ const Sauce = require('../models/sauces');
 
 exports.createSauce = (req, res, next)=>{
     
-    delete req.body._id;
+    const sauceObject = JSON.parse(req.body.sauce);
     const sauce = new Sauce({
-      ...req.body
+      ...sauceObject,
+      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
+
     sauce.save()
     .then(() => res.status(201).json({ message: 'Sauce ajoutée !'}))
     .catch(error => res.status(400).json({ error }));
