@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('../middleware/multer-config');
 
-const sauceCtrl = require('../controllers/sauces').
+const sauceCtrl = require('../controllers/sauces');
 
 router.get('/', sauceCtrl.getAllSauce);
 router.post('/', multer, sauceCtrl.createSauce); 
