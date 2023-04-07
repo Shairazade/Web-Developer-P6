@@ -6,7 +6,7 @@ const userRoutes = require('./routes/user');
 const path = require('path');
 
 const app = express();
-const { error } = require('console');
+
 
 mongoose.connect('mongodb+srv://adminuserp6:SHadusocr23@atlascluster.sezgukv.mongodb.net/?retryWrites=true&w=majority',
   { useNewUrlParser: true,
